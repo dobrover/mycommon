@@ -1,9 +1,9 @@
-local common = require 'common'
+local packageA = {}
 
-local packageA = common.package(...)
+local common = require 'common'
 
 local package_name = ...
 
 packageA.foo = function() return package_name .. '.foo' end
 
-return packageA
+return common.package(packageA, ...)

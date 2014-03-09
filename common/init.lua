@@ -1,3 +1,4 @@
+local common = {}
 -- Utility for lazy loading modules from packages
 -- Suppose folder A has files init.lua and B.lua
 -- Then if in init.lua we do 
@@ -12,11 +13,10 @@
 --   local A = require('A')
 --   -- At this moment A.B is not loaded
 --   local B = A.B -- equivalent to local B = require('A.B')
---   
-
-local function package(package_name)
-    local M = {__name = package_name}
-    local mt = {
+-- @param tbl Module to be converted into package.
+-- @param package_name Package name, all modules will be imported relative to this name.
+function common.package(tbl, package_name)
+    local meta = {
         __index = function (t, k) 
             local status, maybe_module = pcall(require, package_name .. '.'  .. k)
             if status then 
@@ -25,12 +25,7 @@ local function package(package_name)
             end
         end
     }
-    setmetatable(M, mt)
-    return M
+    return setmetatable(tbl, meta)
 end
 
-local common = package(...)
-
-common.package = package
-
-return common
+return common.package(common, ...)
