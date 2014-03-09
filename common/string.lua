@@ -1,6 +1,6 @@
 local string_module = {}
 
--- Interpolate, see tests. 
+-- Interpolate, see tests.
 function string_module.interpolate(s, tbl)
     tbl = tbl or {}
     local has_number_keys, has_non_number_keys = false, false
