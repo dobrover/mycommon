@@ -54,7 +54,7 @@ end
 -- multiple times
 -- However, f(f(...), f(...)) will turn into a sequence with two elements.
 function table_module.vararg_to_table(...)
-    local result = {}
+    local result = {kw={}}
     local length = select('#', ...)
     if length == 0 then
         -- pass
@@ -65,7 +65,6 @@ function table_module.vararg_to_table(...)
             local obj = select(i, ...)
             if table_module.is_kw(obj) then
                 -- Merge keywords into result.kw
-                result.kw = result.kw or {}
                 table_module.update(result.kw, obj.value)
             else
                 -- Other arguments are just elements of array

@@ -60,6 +60,7 @@ function test_vararg_to_table()
     tbl2 = vtt(tbl)
     assert_equal(tbl2, tbl)
     assert_true(table_m.is_unpacked_vararg(tbl2))
+    assert_table(tbl2.kw)
 
     tbl3 = vtt(1, 2, 3)
     assert_equal(3, tbl3.n)

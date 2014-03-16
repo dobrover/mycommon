@@ -1,11 +1,11 @@
 require 'env'
 
-local string = common.string
+local string_m = common.string
 
 module( "test_string", package.seeall, lunit.testcase )
 
 function test_interpolate()
-    local f = string.interpolate
+    local f = string_m.interpolate
     assert_equal("test", f("test"))
     assert_equal("test", f("test", {}))
     assert_equal("test a b", f("test %s %s", {'a', 'b'}))
